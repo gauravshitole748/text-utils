@@ -10,22 +10,26 @@ export default function TextForm(props) {
 
   const handleClearClick = () => {
     setText("");
+    props.showAlert("Text cleared!", "info");
   };
 
   const handleCopy = () => {
     var text = document.getElementById("exampleFormControlTextarea1");
     text.select();
     navigator.clipboard.writeText(text.value);
+    props.showAlert("Copied to clipboard!", "success");
   };
 
   const handleUpOnClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to uppercase!", "success");
   };
 
   const handleLowOnClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to lowercase!", "success");
   };
 
   const speak = () => {
@@ -38,6 +42,13 @@ export default function TextForm(props) {
   const handleRemoveSpaces = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
+    props.showAlert("Removed extra spaces!", "success");
+  };
+
+  const getWordCnt = (str) => {
+    return str.split(" ").filter((word) => {
+      return word !== "";
+    }).length;
   };
 
   return (
@@ -56,6 +67,7 @@ export default function TextForm(props) {
                 style={{
                   backgroundColor:
                     props.mode === "light" ? "#FAFAFA" : "#262626",
+                  color: props.mode === "light" ? "#000" : "#FFF",
                 }}
                 id="exampleFormControlTextarea1"
                 rows="8"
@@ -88,28 +100,28 @@ export default function TextForm(props) {
         </div>
         <div className="d-flex flex-wrap justify-content-sm-start">
           <button
-            className="btn btn-outline-primary m-1"
+            className={`btn btn-${props.mode} m-1`}
             onClick={handleLowOnClick}
             disabled={text === "" && true}>
             Convert to Lowercase
           </button>
           <button
             type="button"
-            className="btn btn-primary m-1"
+            className={`btn btn-${props.mode} m-1`}
             onClick={handleUpOnClick}
             disabled={text === "" && true}>
             Convert to Uppercase
           </button>
           <button
             type="button"
-            className="btn btn-primary m-1"
+            className={`btn btn-${props.mode} m-1`}
             onClick={speak}
             disabled={text === "" && true}>
             Speak
           </button>
           <button
             type="button"
-            className="btn btn-primary m-1"
+            className={`btn btn-${props.mode} m-1`}
             onClick={handleRemoveSpaces}
             disabled={text === "" && true}>
             Remove Extra Spaces
@@ -123,7 +135,8 @@ export default function TextForm(props) {
         }}>
         <h2>Your text summary:</h2>
         <p>
-          {text.split(" ").length} words and {text.length} characters
+          {/* {text.split(" ").length} word(s) and {text.length} character(s) */}
+          {getWordCnt(text)} word(s) and {text.length} character(s)
         </p>
         <span>({0.008 * text.split(" ").length} Minutes to read)</span>
       </div>
