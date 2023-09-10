@@ -6,8 +6,7 @@ const Navbar = (props) => {
     <React.Fragment>
       <nav
         className="navbar navbar-expand-lg bg-body-tertiary"
-        data-bs-theme="dark"
-      >
+        data-bs-theme={props.mode}>
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             {props.title}
@@ -19,8 +18,7 @@ const Navbar = (props) => {
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+            aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -36,6 +34,25 @@ const Navbar = (props) => {
                 </a>
               </li>
             </ul>
+            {/* Switch for enabling Dark mode */}
+            <div className="form-check form-switch mx-2">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckChecked"
+                onClick={props.modeSetting}
+              />
+              <label
+                className="form-check-label"
+                style={{
+                  width: "80px",
+                  color: props.mode === "light" ? "#000" : "#FFF",
+                }}
+                htmlFor="flexSwitchCheckChecked">
+                Dark Mode
+              </label>
+            </div>
             <form className="d-flex" role="search">
               <input
                 className="form-control me-2"
@@ -44,14 +61,15 @@ const Navbar = (props) => {
                 aria-label="Search"
               />
               <button
-                className="btn btn-light"
-                style={{
-                  backgroundColor: "transparent",
-                  color: "#FFF",
-                  borderColor: "#FFF",
-                }}
-                type="submit"
-              >
+                className={
+                  props.mode === "light" ? "btn btn-light" : "btn btn-dark"
+                }
+                // style={{
+                //   backgroundColor: "transparent",
+                //   color: "#000",
+                //   borderColor: "#000",
+                // }}
+                type="button">
                 Search
               </button>
             </form>

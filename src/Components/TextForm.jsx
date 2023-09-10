@@ -43,12 +43,20 @@ export default function TextForm(props) {
   return (
     <>
       <div className="container">
-        <div className="mb-3">
+        <div
+          className="mb-3"
+          style={{
+            color: props.mode === "light" ? "#000" : "#FFF",
+          }}>
           <h2 className="my-3">{props.title}</h2>
           <div className="d-flex">
             <div className="p-2 w-100">
               <textarea
                 className="form-control"
+                style={{
+                  backgroundColor:
+                    props.mode === "light" ? "#FAFAFA" : "#262626",
+                }}
                 id="exampleFormControlTextarea1"
                 rows="8"
                 placeholder="--Enter text here--"
@@ -108,7 +116,11 @@ export default function TextForm(props) {
           </button>
         </div>
       </div>
-      <div className="container my-3">
+      <div
+        className="container my-3"
+        style={{
+          color: props.mode === "light" ? "#000" : "#FFF",
+        }}>
         <h2>Your text summary:</h2>
         <p>
           {text.split(" ").length} words and {text.length} characters
