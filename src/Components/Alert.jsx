@@ -7,11 +7,13 @@ const Alert = (props) => {
   };
 
   return (
-    props.alert && (
-      <div className={`alert alert-${props.alert.type}`} role="alert">
-        {firstUppercase(props.alert.type)} : {props.alert.msg}
-      </div>
-    )
+    <div style={{ height: "50px" }}>
+      {props.alert && (
+        <div className={`alert alert-${props.alert.type}`} role="alert">
+          {firstUppercase(props.alert.type)} : {props.alert.msg}
+        </div>
+      )}
+    </div>
   );
 };
 

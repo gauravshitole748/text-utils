@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   return (
@@ -8,9 +9,9 @@ const Navbar = (props) => {
         className="navbar navbar-expand-lg bg-body-tertiary"
         data-bs-theme={props.mode}>
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <Link to="/" className="navbar-brand">
             {props.title}
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -24,14 +25,14 @@ const Navbar = (props) => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
+                <Link to="/" className="nav-link active" aria-current="page">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">
+                <Link to="/about" className="nav-link">
                   About
-                </a>
+                </Link>
               </li>
             </ul>
             {/* Switch for enabling Dark mode */}
